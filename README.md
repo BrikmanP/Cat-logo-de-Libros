@@ -1,6 +1,6 @@
 # Catálogo de Libros
 
-![Portada del proyecto](images/libros.webp)
+![Portada del proyecto](images/titulo.jpg)
 
 -->
 
