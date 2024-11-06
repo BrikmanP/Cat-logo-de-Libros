@@ -1,29 +1,29 @@
 package org.example.service;
 
-import com.ejemplo.catalogo.model.Book;
+import org.example.BookService;
+import org.example.model.Book;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
-public class CatalogService {
+public class CatalogService implements BookService {
 
     private final GutendexClient gutendexClient;
 
+    @Autowired
     public CatalogService(GutendexClient gutendexClient) {
         this.gutendexClient = gutendexClient;
     }
 
-    public void displayBooks(String query) {
-        List<Book> books = gutendexClient.searchBooks(query);
-        if (books.isEmpty()) {
-            System.out.println("No se encontraron libros para esta búsqueda.");
-        } else {
-            books.forEach(book -> {
-                System.out.println("Título: " + book.getTitle());
-                System.out.println("Autores: " + String.join(", ", book.getAuthors()));
-                System.out.println("------------------------------");
-            });
-        }
+    @Override
+    public List<Book> searchBooks(String query) {
+        return gutendexClient.searchBooks(query);
+    }
+
+    @Override
+    public List<Book> getTopBooks() {
+        return gutendexClient.getTopBooks();
     }
 }
